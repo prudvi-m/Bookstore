@@ -33,7 +33,7 @@ namespace Bookstore
 
             // add this
             services.AddIdentity<User, IdentityRole>(options => {
-                options.Password.RequiredLength = 6;
+                options.Password.RequiredLength = 4;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireDigit = false;
             }).AddEntityFrameworkStores<BookstoreContext>()
@@ -82,3 +82,6 @@ namespace Bookstore
         }
     }
 }
+// /Users/prudvi/Desktop/Bookstore/Models/DataLayer/BookstoreContext.cs
+// dotnet aspnet-codegenerator identity -dc "/Users/prudvi/Desktop/Bookstore/Models/DataLayer/BookstoreContext" -u "June" --email "manager@gmail.com" -p "1234" --role "manager"
+// dotnet tool install -g dotnet-aspnet-codegenerator 

@@ -53,9 +53,13 @@ namespace Bookstore.Models
             RoleManager<IdentityRole> roleManager =
                 serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
+            // string username = "admin";
+            // string password = "Sesame";
+            // string roleName = "Admin";
+
             string username = "admin";
             string password = "Sesame";
-            string roleName = "Admin";
+            string roleName = "manager";
 
             // if role doesn't exist, create it
             if (await roleManager.FindByNameAsync(roleName) == null)
