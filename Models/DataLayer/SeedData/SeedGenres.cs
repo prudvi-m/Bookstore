@@ -19,4 +19,4 @@ namespace Bookstore.Models
 
 }
 
-// dotnet aspnet-codegenerator identity -dc BookstoreContext create "admin" -email "manager@gmail.com" -pw "1234" -role "manager"
+// dotnet aspnet-codegenerator identity -dc BookstoreContext create "manager" -email "manager@gmail.com" -pw "1234" -role "manager"

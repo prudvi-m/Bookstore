@@ -4,8 +4,8 @@ using Bookstore.Models;
 
 namespace Bookstore.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    [Area("Admin")]
+    // [Authorize(Roles = "Manager")]
+    [Authorize(Roles = "manager")]
     public class GenreController : Controller
     {
         private Repository<Genre> data { get; set; }

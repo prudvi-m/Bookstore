@@ -7,8 +7,9 @@ using Bookstore.Models;
 
 namespace Bookstore.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    [Area("Admin")]
+    
+    [Authorize(Roles = "Manager")]
+    [Area("manager")]
     public class UserController : Controller
     {
         private UserManager<User> userManager;
@@ -88,7 +89,7 @@ namespace Bookstore.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> AddToAdmin(string id)
         {
-            IdentityRole adminRole = await roleManager.FindByNameAsync("Admin");
+            IdentityRole adminRole = await roleManager.FindByNameAsync("Manager");
             if (adminRole == null)
             {
                 TempData["message"] = "Admin role does not exist. "
@@ -106,7 +107,7 @@ namespace Bookstore.Areas.Admin.Controllers
         public async Task<IActionResult> RemoveFromAdmin(string id)
         {
             User user = await userManager.FindByIdAsync(id);
-            var result = await userManager.RemoveFromRoleAsync(user, "Admin");
+            var result = await userManager.RemoveFromRoleAsync(user, "Manager");
             if (result.Succeeded) { }
             return RedirectToAction("Index");
         }
@@ -123,7 +124,7 @@ namespace Bookstore.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAdminRole()
         {
-            var result = await roleManager.CreateAsync(new IdentityRole("Admin"));
+            var result = await roleManager.CreateAsync(new IdentityRole("Manager"));
             if (result.Succeeded) { }
             return RedirectToAction("Index");
         }

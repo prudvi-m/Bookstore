@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 
 namespace Bookstore.Models
@@ -53,31 +54,47 @@ namespace Bookstore.Models
             RoleManager<IdentityRole> roleManager =
                 serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            // string username = "admin";
-            // string password = "Sesame";
-            // string roleName = "Admin";
+            
+            var userCreationList = new List<UserCreation>{
+                // new UserCreation() {
+                //     username = "manager",
+                //     password = "Sesame",
+                //     roleName = "Manager"
+                // },
+                new UserCreation() {
+                    username = "manager",
+                    password = "Sesame",
+                    roleName = "Manager"
+                },
+                new UserCreation() {
+                    username = "seller",
+                    password = "Sesame",
+                    roleName = "seller"
+                },
+            };
 
-            string username = "admin";
-            string password = "Sesame";
-            string roleName = "manager";
+            foreach(var userCreation in userCreationList) {
 
-            // if role doesn't exist, create it
-            if (await roleManager.FindByNameAsync(roleName) == null)
-            {
-                await roleManager.CreateAsync(new IdentityRole(roleName));
-            }
+                if (await roleManager.FindByNameAsync(userCreation.roleName) == null)
+                    await roleManager.CreateAsync(new IdentityRole(userCreation.roleName));
 
-            // if username doesn't exist, create it and add to role
-            if (await userManager.FindByNameAsync(username) == null)
-            {
-                User user = new User { UserName = username };
-                var result = await userManager.CreateAsync(user, password);
-                if (result.Succeeded)
+                // if username doesn't exist, create it and add to role
+                if (await userManager.FindByNameAsync(userCreation.username) == null)
                 {
-                    await userManager.AddToRoleAsync(user, roleName);
+                    User user = new User { UserName = userCreation.username };
+                    var result = await userManager.CreateAsync(user, userCreation.password);
+                    if (result.Succeeded)
+                        await userManager.AddToRoleAsync(user, userCreation.roleName);
                 }
             }
         }
+        
+    }
 
+    public class UserCreation {
+            
+        public string username = "";
+        public string password = "";
+        public string roleName = "";
     }
 }

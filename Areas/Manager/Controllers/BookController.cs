@@ -5,8 +5,8 @@ using Bookstore.Models;
 
 namespace Bookstore.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    [Area("Admin")]
+    [Authorize(Roles = "Manager")]
+    [Area("Manager")]
     public class BookController : Controller
     {
         private BookstoreUnitOfWork data { get; set; }

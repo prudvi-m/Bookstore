@@ -3,7 +3,8 @@ using Bookstore.Models;
 
 namespace Bookstore.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    // [Area("Manager")]
+    [Area("manager")]
     public class ValidationController : Controller
     {
         private Repository<Author> authorData { get; set; }

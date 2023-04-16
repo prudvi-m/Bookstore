@@ -4,8 +4,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;    // add this
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Bookstore.Models;
+using System.Linq;
+using System.Collections.Generic;
+
 
 namespace Bookstore
 {
@@ -58,8 +62,8 @@ namespace Bookstore
             {
                 // route for Admin area
                 endpoints.MapAreaControllerRoute(
-                    name: "admin",
-                    areaName: "Admin",
+                    name: "manager",
+                    areaName: "Manager",
                     pattern: "Admin/{controller=Book}/{action=Index}/{id?}");
 
                 // route for paging, sorting, and filtering

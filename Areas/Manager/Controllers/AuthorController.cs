@@ -4,8 +4,9 @@ using Bookstore.Models;
 
 namespace Bookstore.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    [Area("Admin")]
+    
+    [Authorize(Roles = "manager")]
+    [Area("manager")]
     public class AuthorController : Controller
     {
         private Repository<Author> data { get; set; }
